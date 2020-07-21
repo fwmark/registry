@@ -35,6 +35,7 @@ software is likely to be broadly incompatible with "bitwise" users of
 the packet mark.
 
 | Mark value | Software |
+|------------|----------|
 | 0x1337 | [Istio][istio] |
 | 0x1e7700ce | [AWS AppMesh][aws-appmesh] |
 
