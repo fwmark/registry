@@ -7,9 +7,10 @@ connmark into the packet mark.
 Bits are numbered from least-significant bit (LSB) to most-significant
 (MSB). For example, if only mark bit number 3 is set, the overall
 packet mark is 0x4. For search engine discoverability, the full mark
-byte is also listed in the form that people are likely to search for.
+value with individual bits set is also listed in the form that people
+are likely to search for.
 
-| Bit | Mark byte | Software |
+| Bit | Mark value | Software |
 |-----|-----------|----------|
 | 15 | 0x4000 | Kubernetes |
 | 16 | 0x8000 | Kubernetes |
