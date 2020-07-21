@@ -12,8 +12,12 @@ are likely to search for.
 
 | Bit | Mark value | Software |
 |-----|-----------|----------|
-| 15 | 0x4000 | Kubernetes |
-| 16 | 0x8000 | Kubernetes |
-| 18 | 0x20000 | Weave Net |
-| 19 | 0x40000 | Tailscale |
-| 20 | 0x80000 | Tailscale |
+| 15 | 0x4000 | [Kubernetes][k8s] |
+| 16 | 0x8000 | [Kubernetes][k8s] |
+| 18 | 0x20000 | [Weave Net][weave] |
+| 19 | 0x40000 | [Tailscale][ts] |
+| 20 | 0x80000 | [Tailscale][ts] |
+
+[k8s]: https://kubernetes.io/
+[ts]: https://www.tailscale.com/
+[weave]: https://www.weave.works/oss/net/
