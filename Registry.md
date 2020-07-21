@@ -10,7 +10,7 @@ packet mark is 0x4. For search engine discoverability, the full mark
 byte is also listed in the form that people are likely to search for.
 
 | Bit | Mark byte | Software |
-|-----|----------|
+|-----|-----------|----------|
 | 15 | 0x4000 | Kubernetes |
 | 16 | 0x8000 | Kubernetes |
 | 18 | 0x20000 | Weave Net |
