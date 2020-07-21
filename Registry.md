@@ -12,12 +12,31 @@ are likely to search for.
 
 | Bit | Mark value | Software |
 |-----|-----------|----------|
+| 8 | 0x100 | [Cilium][cilium] |
+| 9 | 0x200 | [Cilium][cilium] |
+| 10 | 0x400 | [Cilium][cilium] |
+| 11 | 0x800 | [Cilium][cilium] |
 | 15 | 0x4000 | [Kubernetes][k8s] |
 | 16 | 0x8000 | [Kubernetes][k8s] |
 | 18 | 0x20000 | [Weave Net][weave] |
 | 19 | 0x40000 | [Tailscale][ts] |
 | 20 | 0x80000 | [Tailscale][ts] |
 
+[cilium]: https://cilium.io/
 [k8s]: https://kubernetes.io/
 [ts]: https://www.tailscale.com/
 [weave]: https://www.weave.works/oss/net/
+
+# Non-bitwise users of packet marks
+
+Some software treats the packet mark as a simple integer, and so
+sets/clears all bits at once whenever it touches a packet. Such
+software is likely to be broadly incompatible with "bitwise" users of
+the packet mark.
+
+| Mark value | Software |
+| 0x1337 | [Istio][istio] |
+| 0x1e7700ce | [AWS AppMesh][aws-appmesh] |
+
+[aws-appmesh]: https://aws.amazon.com/app-mesh/
+[istio]: https://istio.io/
