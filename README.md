@@ -3,6 +3,8 @@ uses the packet or connection mark features of Linux's packet filter
 system (Netfilter, sometimes colloquially called iptables or nftables
 after the userspace tools).
 
+[View the registry](Registry.md)
+
 ## Why do we need a registry?
 
 In Netfilter, individual packets and connections can be marked with a
