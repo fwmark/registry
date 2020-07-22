@@ -31,6 +31,7 @@ that people are likely to search for.
 | 11 | 0x800 | [Cilium][cilium] |
 | 14 | 0x4000 | [Kubernetes][k8s] |
 | 15 | 0x8000 | [Kubernetes][k8s] |
+| 16-31 | 0xFFFF0000 | [Calico][cal] |
 | 17 | 0x20000 | [Weave Net][weave] |
 | 18 | 0x40000 | [Tailscale][ts] |
 | 19 | 0x80000 | [Tailscale][ts] |
@@ -39,6 +40,7 @@ that people are likely to search for.
 [k8s]: https://kubernetes.io/
 [ts]: https://www.tailscale.com/
 [weave]: https://www.weave.works/oss/net/
+[cal]: https://docs.projectcalico.org/reference/felix/configuration
 
 ## Non-Bitwise Mark Registry
 
