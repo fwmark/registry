@@ -19,28 +19,52 @@ developers of new software pick some non-interfering values.
 
 Bits are numbered from 0 to 31, least-significant bit (LSB) to
 most-significant (MSB). For example, if only mark bit number 3 is set,
-the overall packet mark is 0x8. For search engine discoverability, the
-full mark value with individual bits set is also listed in the form
-that people are likely to search for.
+the overall packet mark is 0x8.
 
-| Bit | Mark value | Software |
+| Bit(s) | Mark value | Software |
 |-----|-----------|----------|
-| 8 | 0x100 | [Cilium][cilium] |
-| 9 | 0x200 | [Cilium][cilium] |
-| 10 | 0x400 | [Cilium][cilium] |
-| 11 | 0x800 | [Cilium][cilium] |
-| 14 | 0x4000 | [Kubernetes][k8s] |
-| 15 | 0x8000 | [Kubernetes][k8s] |
-| 16-31 | 0xFFFF0000 | [Calico][cal] |
+| 8-11 | 0xf00 | [Cilium][cilium] |
+| 14-15 | 0xc000 | [Kubernetes][k8s] |
 | 17 | 0x20000 | [Weave Net][weave] |
-| 18 | 0x40000 | [Tailscale][ts] |
-| 19 | 0x80000 | [Tailscale][ts] |
+| 16-31 | 0xffff0000 | [Calico][cal] |
+| 18-19 | 0xc0000 | [Tailscale][ts] |
 
 [cilium]: https://cilium.io/
 [k8s]: https://kubernetes.io/
 [ts]: https://www.tailscale.com/
 [weave]: https://www.weave.works/oss/net/
 [cal]: https://docs.projectcalico.org/reference/felix/configuration
+
+### Known conflicts
+
+This section documents the known conflicts. It's just another way of
+visualizing the information in the previous section, focusing on
+conflicting uses.
+
+| Bits | Software | Notes |
+|------|----------|-------|
+| 17 | [Weave Net][weave] and [Calico][cal] | Not a problem in practice, Weave Net and Calico are incompatible anyway. |
+| 18-19 | [Calico][cal] and [Tailscale][ts] | |
+
+### Bits not currently in use
+
+If you're writing new software, here is a list of bitwise marking bits
+that are not in use, according to this registry. This is not a
+guarantee that the bits are unused, merely that this registry doesn't
+know about their use.
+
+| Bit | Mark value |
+|-----|-----------|
+| 0 | 0x1 |
+| 1 | 0x2 |
+| 2 | 0x4 |
+| 3 | 0x8 |
+| 4 | 0x10 |
+| 5 | 0x20 |
+| 6 | 0x40 |
+| 7 | 0x80 |
+| 12 | 0x1000 |
+| 13 | 0x2000 |
 
 ## Non-Bitwise Mark Registry
 
