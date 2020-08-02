@@ -23,21 +23,21 @@ the overall packet mark is 0x8. For search engine discoverability, the
 full mark value with individual bits set is also listed in the form
 that people are likely to search for.
 
-| Bit | Mark value | Software |
-|-----|-----------|----------|
-| 8 | 0x100 | [Cilium][cilium] |
-| 9 | 0x200 | [Cilium][cilium] |
-| 10 | 0x400 | [Cilium][cilium] |
-| 11 | 0x800 | [Cilium][cilium] |
-| 14 | 0x4000 | [Kubernetes][k8s] |
-| 15 | 0x8000 | [Kubernetes][k8s] |
-| 16-31 | 0xFFFF0000 | [Calico][cal] |
-| 17 | 0x20000 | [Weave Net][weave] |
-| 18 | 0x40000 | [Tailscale][ts] |
-| 19 | 0x80000 | [Tailscale][ts] |
+| Bits       | Mark mask  | Software               |
+|------------|------------|------------------------|
+| 0-12,16-31 | 0xFFFF1FFF | [Cilium][cilium]       |
+| 7          | 0x00000080 | [AWS CNI][aws-vpc-cni] |
+| 13         | 0x00002000 | [CNI Portmap][portmap] |
+| 14-15      | 0x0000C000 | [Kubernetes][k8s]      |
+| 16-31      | 0xFFFF0000 | [Calico][cal]          |
+| 17-18      | 0x60000    | [Weave Net][weave]     |
+| 18-19      | 0xC0000    | [Tailscale][ts]        |
 
+
+[aws-vpc-cni]: https://github.com/aws/amazon-vpc-cni-k8s/
 [cilium]: https://cilium.io/
 [k8s]: https://kubernetes.io/
+[portmap]: https://github.com/containernetworking/plugins/
 [ts]: https://www.tailscale.com/
 [weave]: https://www.weave.works/oss/net/
 [cal]: https://docs.projectcalico.org/reference/felix/configuration
@@ -49,13 +49,17 @@ sets/clears all bits at once whenever it touches a packet. Such
 software is likely to be broadly incompatible with "bitwise" users of
 the packet mark.
 
-| Mark value | Software |
-|------------|----------|
-| 0x1337 | [Istio][istio] |
-| 0x1e7700ce | [AWS AppMesh][aws-appmesh] |
+| Mark value | Software                     |
+|------------|------------------------------|
+| Any        | [OpenShift][openshift-ovn]   |
+| 0x00000800 | [Antrea][antrea]             |
+| 0x1337     | [Istio][istio]               |
+| 0x1e7700ce | [AWS AppMesh][aws-appmesh]   |
 
+[antrea]: https://github.com/vmware-tanzu/antrea
 [aws-appmesh]: https://aws.amazon.com/app-mesh/
 [istio]: https://istio.io/
+[openshift-ovn]: https://github.com/ovn-org/ovn-kubernetes
 
 ## Why do we need a registry?
 
