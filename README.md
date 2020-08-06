@@ -23,24 +23,32 @@ the overall packet mark is 0x8. For search engine discoverability, the
 full mark value with individual bits set is also listed in the form
 that people are likely to search for.
 
-| Bits       | Mark mask  | Software               |
-|------------|------------|------------------------|
-| 0-12,16-31 | 0xFFFF1FFF | [Cilium][cilium]       |
-| 7          | 0x00000080 | [AWS CNI][aws-vpc-cni] |
-| 13         | 0x00002000 | [CNI Portmap][portmap] |
-| 14-15      | 0x0000C000 | [Kubernetes][k8s]      |
-| 16-31      | 0xFFFF0000 | [Calico][cal]          |
-| 17-18      | 0x60000    | [Weave Net][weave]     |
-| 18-19      | 0xC0000    | [Tailscale][ts]        |
+| Bits       | Mark mask  | Software               | Source                                  |
+|------------|------------|------------------------|-----------------------------------------|
+| 0-12,16-31 | 0xFFFF1FFF | [Cilium][cilium]       | [Source code][cilium-src]               |
+| 7          | 0x00000080 | [AWS CNI][aws-vpc-cni] | [Source code][aws-vpc-cni-src]          |
+| 13         | 0x00002000 | [CNI Portmap][portmap] | [Documentation][portmap-src]            |
+| 14-15      | 0x0000C000 | [Kubernetes][k8s]      | [Source code][k8s-src]                  |
+| 16-31      | 0xFFFF0000 | [Calico][calico]       | [Documentation][calico-src]             |
+| 17-18      | 0x60000    | [Weave Net][weave]     | [Source][weave-src1] [code][weave-src2] |
+| 18-19      | 0xC0000    | [Tailscale][ts]        | [Source code][ts-src]                   |
 
 
 [aws-vpc-cni]: https://github.com/aws/amazon-vpc-cni-k8s/
+[aws-vpc-cni-src]: https://github.com/aws/amazon-vpc-cni-k8s/blob/v1.6.3/pkg/networkutils/network.go#L95
 [cilium]: https://cilium.io/
+[cilium-src]: https://github.com/cilium/cilium/blob/v1.8.2/bpf/lib/common.h#L380-L410
 [k8s]: https://kubernetes.io/
+[k8s-src]: https://github.com/kubernetes/kubernetes/blob/v1.18.6/pkg/kubelet/apis/config/v1beta1/defaults.go#L34-L35
 [portmap]: https://github.com/containernetworking/plugins/
+[portmap-src]: https://github.com/containernetworking/plugins/blob/v0.8.6/plugins/meta/portmap/README.md#usage
 [ts]: https://www.tailscale.com/
+[ts-src]: https://github.com/tailscale/tailscale/blob/v1.1.0/wgengine/router/router_linux.go#L20-L47
 [weave]: https://www.weave.works/oss/net/
-[cal]: https://docs.projectcalico.org/reference/felix/configuration
+[weave-src1]: https://github.com/weaveworks/weave/blob/v2.7.0/npc/constants.go#L5
+[weave-src2]: https://github.com/weaveworks/weave/blob/v2.7.0/net/ipsec/ipsec.go#L29
+[calico]: https://www.projectcalico.org
+[calico-src]: https://docs.projectcalico.org/reference/felix/configuration#iptables-dataplane-configuration
 
 ## Non-Bitwise Mark Registry
 
@@ -49,17 +57,21 @@ sets/clears all bits at once whenever it touches a packet. Such
 software is likely to be broadly incompatible with "bitwise" users of
 the packet mark.
 
-| Mark value | Software                     |
-|------------|------------------------------|
-| Any        | [OpenShift][openshift-ovn]   |
-| 0x00000800 | [Antrea][antrea]             |
-| 0x1337     | [Istio][istio]               |
-| 0x1e7700ce | [AWS AppMesh][aws-appmesh]   |
+| Mark value | Software                     | Source                           |
+|------------|------------------------------|----------------------------------|
+| Any        | [OpenShift][openshift-ovn]   | [Source code][openshift-ovn-src] |
+| 0x00000800 | [Antrea][antrea]             | [Documentation][antrea-src]      |
+| 0x1337     | [Istio][istio]               | [Documentation][istio-src]       |
+| 0x1e7700ce | [AWS AppMesh][aws-appmesh]   | [Documentation][aws-appmesh-src] |
 
 [antrea]: https://github.com/vmware-tanzu/antrea
+[antrea-src]: https://github.com/vmware-tanzu/antrea/blob/v0.8.2/docs/policy-only.md#routing
 [aws-appmesh]: https://aws.amazon.com/app-mesh/
+[aws-appmesh-src]: https://docs.aws.amazon.com/app-mesh/latest/userguide/appmesh-getting-started.html
 [istio]: https://istio.io/
+[istio-src]: https://github.com/cilium/istio/blob/46d7da707bb8b162ad561a704697eb8aff418463/tools/deb/istio-iptables.sh#L69
 [openshift-ovn]: https://github.com/ovn-org/ovn-kubernetes
+[openshift-ovn-src]: https://github.com/ovn-org/ovn-kubernetes/blob/2462a724e54b626b69eb1813660f9ed5c0f783f0/go-controller/pkg/node/gateway_iptables.go#L192
 
 ## Why do we need a registry?
 
